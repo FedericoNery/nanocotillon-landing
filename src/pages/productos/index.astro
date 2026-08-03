@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import CategoryCard from "../../components/CategoryCard.astro";
+
+const categorias = (await getCollection("categorias")).sort((a, b) => a.data.orden - b.data.orden);
+---
+
+<BaseLayout title="Productos">
+  <section class="py-16">
+    <Container>
+      <h1 class="font-display text-4xl font-extrabold text-ink">Productos</h1>
+      <p class="mt-2 text-ink-soft">Elegí una categoría para ver los productos disponibles.</p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          categorias.map((categoria) => (
+            <CategoryCard
+              slug={categoria.id}
+              nombre={categoria.data.nombre}
+              descripcion={categoria.data.descripcion}
+              icono={categoria.data.icono}
+              color={categoria.data.color}
+              anim={categoria.data.anim}
+            />
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

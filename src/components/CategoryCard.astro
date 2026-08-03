@@ -1,0 +1,52 @@
+---
+const BORDER_CLASSES: Record<string, string> = {
+  "brand-red": "group-hover:border-brand-red group-focus-visible:border-brand-red",
+  "brand-magenta": "group-hover:border-brand-magenta group-focus-visible:border-brand-magenta",
+  "brand-blue": "group-hover:border-brand-blue group-focus-visible:border-brand-blue",
+  "brand-yellow": "group-hover:border-brand-yellow group-focus-visible:border-brand-yellow",
+  "brand-orange": "group-hover:border-brand-orange group-focus-visible:border-brand-orange",
+  "brand-celeste": "group-hover:border-brand-celeste group-focus-visible:border-brand-celeste",
+};
+
+const ICON_ANIM_CLASSES: Record<string, string> = {
+  wobble: "group-hover:animate-wobble group-focus-visible:animate-wobble",
+  pop: "group-hover:animate-pop group-focus-visible:animate-pop",
+  wiggle: "group-hover:animate-wiggle group-focus-visible:animate-wiggle",
+  tilt: "group-hover:animate-tilt group-focus-visible:animate-tilt",
+  flutter: "group-hover:animate-flutter group-focus-visible:animate-flutter",
+  bob: "group-hover:animate-bob group-focus-visible:animate-bob",
+};
+
+interface Props {
+  slug: string;
+  nombre: string;
+  descripcion: string;
+  icono: string;
+  color: keyof typeof BORDER_CLASSES;
+  anim: keyof typeof ICON_ANIM_CLASSES;
+}
+
+const { slug, nombre, descripcion, icono, color, anim } = Astro.props;
+const borderClass = BORDER_CLASSES[color];
+const iconAnimClass = ICON_ANIM_CLASSES[anim];
+---
+
+<a
+  href={`/productos/${slug}`}
+  class:list={[
+    "group flex flex-col gap-3 rounded-card border border-border bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-md",
+    borderClass,
+  ]}
+>
+  <span
+    class:list={[
+      "badge-scallop category-icon-anim flex h-16 w-16 items-center justify-center bg-surface-alt text-3xl",
+      iconAnimClass,
+    ]}
+  >
+    {icono}
+  </span>
+  <h3 class="text-lg font-bold text-ink">{nombre}</h3>
+  <p class="text-sm text-ink-soft">{descripcion}</p>
+  <span class="mt-auto text-sm font-medium text-brand-red group-hover:underline">Ver productos →</span>
+</a>

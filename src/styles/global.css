@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Baloo 2", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-brand-red: #f23545;
+  --color-brand-magenta: #f22e8a;
+  --color-brand-blue: #0c2ff2;
+  --color-brand-yellow: #f2e313;
+  --color-brand-orange: #f27b35;
+  --color-brand-celeste: #75aadb;
+
+  --color-ink: #1e1512;
+  --color-ink-soft: #6b5f5a;
+  --color-surface: #fffdf8;
+  --color-surface-alt: #f5f1ec;
+  --color-border: #e5ded6;
+
+  --radius-card: 0.625rem;
+
+  --animate-bob: bob 0.6s ease-in-out infinite;
+  --animate-flutter: flutter 0.6s ease-in-out infinite;
+  --animate-wiggle: wiggle 0.5s ease-in-out infinite;
+  --animate-tilt: tilt 0.6s ease-in-out infinite;
+  --animate-pop: pop 0.35s ease-in-out 2;
+  --animate-wobble: wobble 0.7s ease-in-out infinite;
+}
+
+@utility badge-scallop {
+  clip-path: polygon(
+    50% 0%, 61.1% 8.5%, 75% 6.7%, 80.4% 19.6%, 93.3% 25%, 91.5% 38.9%,
+    100% 50%, 91.5% 61.1%, 93.3% 75%, 80.4% 80.4%, 75% 93.3%, 61.1% 91.5%,
+    50% 100%, 38.9% 91.5%, 25% 93.3%, 19.6% 80.4%, 6.7% 75%, 8.5% 61.1%,
+    0% 50%, 8.5% 38.9%, 6.7% 25%, 19.6% 19.6%, 25% 6.7%, 38.9% 8.5%
+  );
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes flutter {
+  0%, 100% { transform: skewX(0deg); }
+  50% { transform: skewX(3deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(8deg); }
+  75% { transform: rotate(-8deg); }
+}
+
+@keyframes tilt {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  50% { transform: rotate(-6deg) translateX(-1px); }
+}
+
+@keyframes pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(1.06, 0.94); }
+  75% { transform: scale(0.95, 1.05); }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-icon-anim {
+    animation: none !important;
+  }
+}

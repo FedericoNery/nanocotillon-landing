@@ -1,0 +1,67 @@
+---
+import Container from "./Container.astro";
+import IconInstagram from "./icons/IconInstagram.astro";
+import IconFacebook from "./icons/IconFacebook.astro";
+import { getWhatsappHref } from "../lib/whatsapp";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-ink py-12 text-surface">
+  <Container>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div>
+        <p class="font-display text-lg font-extrabold">Nano Cotillón</p>
+        <p class="mt-2 text-sm text-surface/70">
+          Cotillón, repostería, descartables, golosinas y fiestas patrias para tu próximo festejo.
+        </p>
+      </div>
+
+      <div>
+        <p class="font-display text-sm font-bold uppercase tracking-wide text-surface/70">Contacto</p>
+        <ul class="mt-2 flex flex-col gap-1 text-sm">
+          <li>
+            <a href={getWhatsappHref()} target="_blank" rel="noopener noreferrer" class="hover:underline">
+              WhatsApp: +54 9 11 2187-9513
+            </a>
+          </li>
+          <li>Dirección: Av. Lafuente 3121, C1437 CABA</li>
+          <li>Lun a Vie: 08:30-13:00 y 16:00-18:30</li>
+          <li>Sáb: 08:30-13:00</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-display text-sm font-bold uppercase tracking-wide text-surface/70">Seguinos</p>
+        <ul class="mt-2 flex flex-col gap-1 text-sm">
+          <li>
+            <a
+              href="https://www.instagram.com/nanocotillon/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 hover:underline"
+            >
+              <IconInstagram class="h-4 w-4" />
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.facebook.com/nanocotillon"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 hover:underline"
+            >
+              <IconFacebook class="h-4 w-4" />
+              Facebook
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-10 text-center text-xs text-surface/50">
+      © {currentYear} Nano Cotillón. Todos los derechos reservados.
+    </p>
+  </Container>
+</footer>

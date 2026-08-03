@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import { getWhatsappHref } from "../lib/whatsapp";
+
+const DIRECCION = "Av. Lafuente 3121, C1437 Cdad. Autónoma de Buenos Aires";
+const mapsEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(DIRECCION)}&output=embed`;
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(DIRECCION)}`;
+---
+
+<BaseLayout title="Ubicación">
+  <section class="py-16">
+    <Container>
+      <h1 class="font-display text-4xl font-extrabold text-ink">Ubicación</h1>
+
+      <div class="mt-8 grid gap-8 md:grid-cols-2">
+        <div class="space-y-4">
+          <div>
+            <h2 class="font-display text-sm font-bold uppercase tracking-wide text-ink-soft">Dirección</h2>
+            <a href={mapsHref} target="_blank" rel="noopener noreferrer" class="mt-1 block text-ink hover:underline">
+              {DIRECCION}
+            </a>
+          </div>
+          <div>
+            <h2 class="font-display text-sm font-bold uppercase tracking-wide text-ink-soft">Horarios</h2>
+            <dl class="mt-1 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-ink">
+              <dt class="font-medium">Lunes a Viernes</dt>
+              <dd>08:30 a 13:00 · 16:00 a 18:30</dd>
+              <dt class="font-medium">Sábados</dt>
+              <dd>08:30 a 13:00</dd>
+            </dl>
+          </div>
+          <div>
+            <h2 class="font-display text-sm font-bold uppercase tracking-wide text-ink-soft">Contacto</h2>
+            <a href={getWhatsappHref()} target="_blank" rel="noopener noreferrer" class="mt-1 block text-brand-red hover:underline">
+              Escribinos por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="aspect-square overflow-hidden rounded-card border border-border md:aspect-auto md:h-full md:min-h-80">
+          <iframe
+            src={mapsEmbedSrc}
+            title={`Mapa: ${DIRECCION}`}
+            width="100%"
+            height="100%"
+            style="border:0;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

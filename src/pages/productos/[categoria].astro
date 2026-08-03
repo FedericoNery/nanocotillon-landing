@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import ProductCard from "../../components/ProductCard.astro";
+
+export async function getStaticPaths() {
+  const categorias = await getCollection("categorias");
+  return categorias.map((categoria) => ({
+    params: { categoria: categoria.id },
+    props: { categoria },
+  }));
+}
+
+const { categoria } = Astro.props;
+const productos = (await getCollection("productos")).filter((producto) => producto.data.categoria.id === categoria.id);
+---
+
+<BaseLayout title={categoria.data.nombre}>
+  <section class="py-16">
+    <Container>
+      <a href="/productos" class="text-sm font-medium text-brand-red hover:underline">← Todas las categorías</a>
+
+      <div class="mt-4 flex items-center gap-3">
+        <span class="text-4xl">{categoria.data.icono}</span>
+        <div>
+          <h1 class="font-display text-3xl font-extrabold text-ink">{categoria.data.nombre}</h1>
+          <p class="text-ink-soft">{categoria.data.descripcion}</p>
+        </div>
+      </div>
+
+      {
+        productos.length > 0 ? (
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {productos.map((producto) => (
+              <ProductCard
+                nombre={producto.data.nombre}
+                descripcion={producto.data.descripcion}
+                icono={categoria.data.icono}
+              />
+            ))}
+          </div>
+        ) : (
+          <p class="mt-8 text-ink-soft">Todavía no hay productos cargados en esta categoría.</p>
+        )
+      }
+    </Container>
+  </section>
+</BaseLayout>
