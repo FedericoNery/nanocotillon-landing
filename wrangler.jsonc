@@ -7,7 +7,7 @@
 	"pages_build_output_dir": "./dist", // Indica a Cloudflare Pages dónde leer el build
 	"assets": {
 		"directory": "./dist",
-		"binding": "ASSETS"
+		//"binding": "ASSETS"
 	},
 	"observability": {
 		"enabled": true
