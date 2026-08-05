@@ -3,7 +3,8 @@
 	"compatibility_date": "2026-08-05",
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "nano-cotillon-landing",
-	"main": "@astrojs/cloudflare/entrypoints/server",
+	//"main": "@astrojs/cloudflare/entrypoints/server",
+	"pages_build_output_dir": "./dist", // Indica a Cloudflare Pages dónde leer el build
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS"
