@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Container from "../../components/Container.astro";
 import ProductCard from "../../components/ProductCard.astro";
+import CategoryGallery from "../../components/CategoryGallery.astro";
 
 export async function getStaticPaths() {
   const categorias = await getCollection("categorias");
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { categoria } = Astro.props;
-const productos = (await getCollection("productos")).filter((producto) => producto.data.categoria.id === categoria.id);
+//const productos = (await getCollection("productos")).filter((producto) => producto.data.categoria.id === categoria.id);
 ---
 
 <BaseLayout title={categoria.data.nombre}>
@@ -29,8 +30,12 @@ const productos = (await getCollection("productos")).filter((producto) => produc
         </div>
       </div>
 
+      <div class="mt-8">
+        <CategoryGallery categoria={categoria.id} />
+      </div>
+
       {
-        productos.length > 0 ? (
+        /* productos.length > 0 ? (
           <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {productos.map((producto) => (
               <ProductCard
@@ -42,7 +47,7 @@ const productos = (await getCollection("productos")).filter((producto) => produc
           </div>
         ) : (
           <p class="mt-8 text-ink-soft">Todavía no hay productos cargados en esta categoría.</p>
-        )
+        ) */
       }
     </Container>
   </section>
