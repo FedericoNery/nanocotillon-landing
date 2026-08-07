@@ -2,25 +2,48 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsappFloatingButton from "../components/WhatsappFloatingButton.astro";
+import StructuredData from "../components/StructuredData.astro";
 import "../styles/global.css";
 
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = "Cotillón, repostería, descartables y golosinas para tu próximo festejo." } =
-  Astro.props;
+const {
+  title,
+  description = "Cotillón, repostería, descartables y golosinas para tu próximo festejo.",
+  image = "/og-image.png",
+} = Astro.props;
+
+const pageTitle = `${title} · Nano Cotillón`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <title>{title} · Nano Cotillón</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{pageTitle}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nano Cotillón" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,6 +51,8 @@ const { title, description = "Cotillón, repostería, descartables y golosinas p
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Baloo+2:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <StructuredData />
   </head>
   <body>
     <Header />

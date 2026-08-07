@@ -5,9 +5,25 @@ import Container from "../../components/Container.astro";
 import CategoryCard from "../../components/CategoryCard.astro";
 
 const categorias = (await getCollection("categorias")).sort((a, b) => a.data.orden - b.data.orden);
+
+const categoriesItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: categorias.map((categoria, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: categoria.data.nombre,
+    description: categoria.data.descripcion,
+    url: new URL(`/productos/${categoria.id}`, Astro.site).toString(),
+  })),
+};
 ---
 
-<BaseLayout title="Productos">
+<BaseLayout
+  title="Productos"
+  description="Catálogo de cotillón, repostería, descartables, golosinas y fiestas patrias organizado por categorías. Consultá disponibilidad y precios por WhatsApp."
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(categoriesItemList)} />
   <section class="py-16">
     <Container>
       <h1 class="font-display text-4xl font-extrabold text-ink">Productos</h1>

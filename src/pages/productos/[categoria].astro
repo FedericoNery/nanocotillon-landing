@@ -17,7 +17,7 @@ const { categoria } = Astro.props;
 //const productos = (await getCollection("productos")).filter((producto) => producto.data.categoria.id === categoria.id);
 ---
 
-<BaseLayout title={categoria.data.nombre}>
+<BaseLayout title={categoria.data.nombre} description={categoria.data.descripcion}>
   <section class="py-16">
     <Container>
       <a href="/productos" class="text-sm font-medium text-brand-red hover:underline">← Todas las categorías</a>
