@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 import MarcasCarousel from "../components/MarcasCarousel.astro";
+import BannersSection from "../components/BannersSection.astro";
 import IconInstagram from "../components/icons/IconInstagram.astro";
 import IconFacebook from "../components/icons/IconFacebook.astro";
 import { getWhatsappHref } from "../lib/whatsapp";
@@ -100,78 +101,7 @@ const pasos = [
     </Container>
   </section>
 
-  <section class="overflow-x-clip py-16">
-    <Container>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <div class="relative flex flex-col items-start gap-4 overflow-hidden rounded-card bg-surface-alt p-6 pt-8 text-ink shadow-md transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none sm:p-8 sm:pt-10">
-          <div
-            aria-hidden="true"
-            class="absolute inset-x-0 top-0 h-3 bg-[linear-gradient(to_right,var(--color-brand-celeste)_0,var(--color-brand-celeste)_33.33%,white_33.33%,white_66.66%,var(--color-brand-celeste)_66.66%,var(--color-brand-celeste)_100%)] sm:h-4"
-          ></div>
-          <div>
-            <h2 class="font-display text-xl font-bold">Fiestas Patrias</h2>
-            <p class="mt-2 text-sm text-ink/80">
-              Escarapelas, banderines y cotillón celeste y blanco para el 25 de Mayo y el 9 de Julio.
-            </p>
-          </div>
-          <a
-            href="/productos/fiestas-patrias"
-            class="inline-flex shrink-0 items-center justify-center rounded-full bg-brand-blue px-5 py-2.5 text-sm font-bold text-white transition hover:brightness-110"
-          >
-            Ver productos
-          </a>
-        </div>
-
-        <!-- <div class="relative flex flex-col items-start gap-4 overflow-hidden rounded-card bg-surface-alt p-6 pt-8 text-ink shadow-md transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none sm:p-8 sm:pt-10">
-          <div aria-hidden="true" class="absolute inset-x-0 top-0 h-3 bg-brand-yellow sm:h-4"></div>
-          <div>
-            <h2 class="font-display text-xl font-bold">Comuniones y Confirmaciones</h2>
-            <p class="mt-2 text-sm text-ink/80">
-              Recuerdos, centros de mesa y cotillón elegante para celebrar este día tan especial.
-            </p>
-          </div>
-          <a
-            href="#"
-            class="inline-flex shrink-0 items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-surface transition hover:brightness-110"
-          >
-            Ver productos
-          </a>
-        </div> -->
-
-        <div class="relative flex flex-col items-start gap-4 overflow-hidden rounded-card bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-orange)_40px,var(--color-brand-orange)_80px)] p-6 shadow-md transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none sm:p-8">
-          <div class="absolute inset-0 bg-black/35"></div>
-          <div class="relative">
-            <h2 class="font-display text-xl font-bold text-white">Halloween</h2>
-            <p class="mt-2 text-sm text-white/90">
-              Disfraces, decoración terrorífica y golosinas para la noche más espeluznante del año.
-            </p>
-          </div>
-          <a
-            href="/productos/halloween"
-            class="relative inline-flex shrink-0 items-center justify-center rounded-full bg-brand-yellow px-5 py-2.5 text-sm font-bold text-ink transition hover:brightness-105"
-          >
-            Ver productos
-          </a>
-        </div>
-
-        <!-- <div class="relative flex flex-col items-start gap-4 overflow-hidden rounded-card bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-magenta)_40px,var(--color-brand-magenta)_80px)] p-6 shadow-md transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none sm:p-8">
-          <div class="absolute inset-0 bg-black/35"></div>
-          <div class="relative">
-            <h2 class="font-display text-xl font-bold text-white">Despedidas de Solteros</h2>
-            <p class="mt-2 text-sm text-white/90">
-              Cotillón, accesorios y decoración para una despedida inolvidable.
-            </p>
-          </div>
-          <a
-            href="#"
-            class="relative inline-flex shrink-0 items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-bold text-ink transition hover:brightness-95"
-          >
-            Ver productos
-          </a>
-        </div> -->
-      </div>
-    </Container>
-  </section>
+  <BannersSection />
 
   <section class="overflow-x-clip bg-surface-alt py-16">
     <Container>

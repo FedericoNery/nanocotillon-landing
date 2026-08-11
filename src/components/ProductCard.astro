@@ -1,17 +1,32 @@
 ---
+import { urlFor, type SanityImage } from "../lib/sanity";
+
 interface Props {
   nombre: string;
-  descripcion: string;
-  icono: string;
+  imagen: SanityImage;
+  disponibilidad?: "disponible" | "agotado" | "proximamente";
 }
 
-const { nombre, descripcion, icono } = Astro.props;
+const { nombre, imagen, disponibilidad } = Astro.props;
+
+const imageSrc = urlFor(imagen).width(400).height(400).fit("crop").auto("format").url();
+
+const DISPONIBILIDAD_LABEL: Record<string, string> = {
+  agotado: "Agotado",
+  proximamente: "Próximamente",
+};
 ---
 
-<div class="flex flex-col gap-3 rounded-card border border-border bg-white p-6">
-  <div class="flex h-16 w-16 items-center justify-center rounded-card bg-surface-alt text-3xl">
-    {icono}
+<div class="group relative aspect-square overflow-hidden rounded-card border border-border bg-white" tabindex="0">
+  <img src={imageSrc} alt={imagen.alt || nombre} loading="lazy" class="h-full w-full object-cover" />
+  {
+    disponibilidad && disponibilidad !== "disponible" && (
+      <span class="absolute right-2 top-2 rounded-full bg-ink/80 px-3 py-1 text-xs font-bold text-white">
+        {DISPONIBILIDAD_LABEL[disponibilidad]}
+      </span>
+    )
+  }
+  <div class="absolute inset-x-0 bottom-0 translate-y-full bg-black/60 px-3 py-2 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+    <p class="text-sm font-medium text-white">{nombre}</p>
   </div>
-  <h3 class="text-base font-bold text-ink">{nombre}</h3>
-  <p class="text-sm text-ink-soft">{descripcion}</p>
 </div>

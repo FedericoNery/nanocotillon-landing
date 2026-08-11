@@ -1,10 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Container from "../../components/Container.astro";
 import CategoryCard from "../../components/CategoryCard.astro";
+import { getCategorias } from "../../lib/sanity";
 
-const categorias = (await getCollection("categorias")).sort((a, b) => a.data.orden - b.data.orden);
+const categorias = await getCategorias();
 
 const categoriesItemList = {
   "@context": "https://schema.org",
@@ -12,9 +12,9 @@ const categoriesItemList = {
   itemListElement: categorias.map((categoria, index) => ({
     "@type": "ListItem",
     position: index + 1,
-    name: categoria.data.nombre,
-    description: categoria.data.descripcion,
-    url: new URL(`/productos/${categoria.id}`, Astro.site).toString(),
+    name: categoria.nombre,
+    description: categoria.descripcion,
+    url: new URL(`/productos/${categoria.slug}`, Astro.site).toString(),
   })),
 };
 ---
@@ -33,12 +33,12 @@ const categoriesItemList = {
         {
           categorias.map((categoria) => (
             <CategoryCard
-              slug={categoria.id}
-              nombre={categoria.data.nombre}
-              descripcion={categoria.data.descripcion}
-              icono={categoria.data.icono}
-              color={categoria.data.color}
-              anim={categoria.data.anim}
+              slug={categoria.slug}
+              nombre={categoria.nombre}
+              descripcion={categoria.descripcion}
+              icono={categoria.icono}
+              color={categoria.color}
+              anim={categoria.anim}
             />
           ))
         }

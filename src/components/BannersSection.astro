@@ -1,0 +1,90 @@
+---
+import Container from "./Container.astro";
+import { getBanners } from "../lib/sanity";
+
+const banners = await getBanners();
+
+const FRANJA_STRIPE_CLASSES: Record<string, string> = {
+  "brand-red": "bg-[linear-gradient(to_right,var(--color-brand-red)_0,var(--color-brand-red)_33.33%,white_33.33%,white_66.66%,var(--color-brand-red)_66.66%,var(--color-brand-red)_100%)]",
+  "brand-magenta": "bg-[linear-gradient(to_right,var(--color-brand-magenta)_0,var(--color-brand-magenta)_33.33%,white_33.33%,white_66.66%,var(--color-brand-magenta)_66.66%,var(--color-brand-magenta)_100%)]",
+  "brand-blue": "bg-[linear-gradient(to_right,var(--color-brand-blue)_0,var(--color-brand-blue)_33.33%,white_33.33%,white_66.66%,var(--color-brand-blue)_66.66%,var(--color-brand-blue)_100%)]",
+  "brand-yellow": "bg-[linear-gradient(to_right,var(--color-brand-yellow)_0,var(--color-brand-yellow)_33.33%,white_33.33%,white_66.66%,var(--color-brand-yellow)_66.66%,var(--color-brand-yellow)_100%)]",
+  "brand-orange": "bg-[linear-gradient(to_right,var(--color-brand-orange)_0,var(--color-brand-orange)_33.33%,white_33.33%,white_66.66%,var(--color-brand-orange)_66.66%,var(--color-brand-orange)_100%)]",
+  "brand-celeste": "bg-[linear-gradient(to_right,var(--color-brand-celeste)_0,var(--color-brand-celeste)_33.33%,white_33.33%,white_66.66%,var(--color-brand-celeste)_66.66%,var(--color-brand-celeste)_100%)]",
+};
+
+const DIAGONAL_BG_CLASSES: Record<string, string> = {
+  "brand-red": "bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-red)_40px,var(--color-brand-red)_80px)]",
+  "brand-magenta": "bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-magenta)_40px,var(--color-brand-magenta)_80px)]",
+  "brand-blue": "bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-blue)_40px,var(--color-brand-blue)_80px)]",
+  "brand-yellow": "bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-yellow)_40px,var(--color-brand-yellow)_80px)]",
+  "brand-orange": "bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-orange)_40px,var(--color-brand-orange)_80px)]",
+  "brand-celeste": "bg-[repeating-linear-gradient(45deg,var(--color-ink)_0,var(--color-ink)_40px,var(--color-brand-celeste)_40px,var(--color-brand-celeste)_80px)]",
+};
+
+const BUTTON_CLASSES: Record<string, string> = {
+  "brand-red": "bg-brand-red text-white",
+  "brand-magenta": "bg-brand-magenta text-white",
+  "brand-blue": "bg-brand-blue text-white",
+  "brand-yellow": "bg-brand-yellow text-ink",
+  "brand-orange": "bg-brand-orange text-white",
+  "brand-celeste": "bg-brand-celeste text-ink",
+};
+---
+
+{
+  banners.length > 0 && (
+    <section class="overflow-x-clip py-16">
+      <Container>
+        <div class="grid gap-6 sm:grid-cols-2">
+          {banners.map((banner) =>
+            banner.estilo === "diagonal" ? (
+              <div
+                class:list={[
+                  "relative flex flex-col items-start gap-4 overflow-hidden rounded-card p-6 shadow-md transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none sm:p-8",
+                  DIAGONAL_BG_CLASSES[banner.color],
+                ]}
+              >
+                <div class="absolute inset-0 bg-black/35" />
+                <div class="relative">
+                  <h2 class="font-display text-xl font-bold text-white">{banner.titulo}</h2>
+                  {banner.descripcion && <p class="mt-2 text-sm text-white/90">{banner.descripcion}</p>}
+                </div>
+                {banner.link && (
+                  <a
+                    href={banner.link}
+                    class:list={[
+                      "relative inline-flex shrink-0 items-center justify-center rounded-full px-5 py-2.5 text-sm font-bold transition hover:brightness-105",
+                      BUTTON_CLASSES[banner.color],
+                    ]}
+                  >
+                    {banner.botonTexto || "Ver productos"}
+                  </a>
+                )}
+              </div>
+            ) : (
+              <div class="relative flex flex-col items-start gap-4 overflow-hidden rounded-card bg-surface-alt p-6 pt-8 text-ink shadow-md transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none sm:p-8 sm:pt-10">
+                <div aria-hidden="true" class:list={["absolute inset-x-0 top-0 h-3 sm:h-4", FRANJA_STRIPE_CLASSES[banner.color]]} />
+                <div>
+                  <h2 class="font-display text-xl font-bold">{banner.titulo}</h2>
+                  {banner.descripcion && <p class="mt-2 text-sm text-ink/80">{banner.descripcion}</p>}
+                </div>
+                {banner.link && (
+                  <a
+                    href={banner.link}
+                    class:list={[
+                      "inline-flex shrink-0 items-center justify-center rounded-full px-5 py-2.5 text-sm font-bold transition hover:brightness-110",
+                      BUTTON_CLASSES[banner.color],
+                    ]}
+                  >
+                    {banner.botonTexto || "Ver productos"}
+                  </a>
+                )}
+              </div>
+            ),
+          )}
+        </div>
+      </Container>
+    </section>
+  )
+}

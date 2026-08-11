@@ -15,9 +15,16 @@
   "dependencies": {
     "@astrojs/cloudflare": "^14.1.7",
     "@astrojs/sitemap": "^3.7.3",
+    "@portabletext/types": "^4.0.2",
+    "@sanity/client": "^7.26.2",
+    "@sanity/image-url": "^2.1.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.6",
     "tailwindcss": "^4.3.3",
     "wrangler": "^4.119.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }
