@@ -33,8 +33,18 @@ export const categoria = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "imagen",
+      title: "Imagen de preview",
+      description: "Foto que se muestra en la tarjeta de la categoría (home y listado de productos).",
+      type: "image",
+      options: { hotspot: true },
+      fields: [defineField({ name: "alt", title: "Texto alternativo", type: "string" })],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "icono",
       title: "Ícono (emoji)",
+      description: "Se usa en el menú de categorías del header y en el footer, ya no en la tarjeta de categoría.",
       type: "string",
       validation: (rule) => rule.required(),
     }),
@@ -53,8 +63,15 @@ export const categoria = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({ name: "orden", title: "Orden", type: "number", initialValue: 0 }),
+    defineField({
+      name: "vitrinaDestacada",
+      title: "Vitrina destacada",
+      description: "Vitrina de productos que se muestra arriba del listado completo en la página de esta categoría.",
+      type: "reference",
+      to: [{ type: "vitrina" }],
+    }),
   ],
   preview: {
-    select: { title: "nombre", subtitle: "descripcion" },
+    select: { title: "nombre", subtitle: "descripcion", media: "imagen" },
   },
 });
